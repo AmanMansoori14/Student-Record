@@ -10,6 +10,7 @@ export default class Studentdata extends Component {
         { roll: 1123, name: "Lokesh", branch: "Mechanical", physics: 55, chemistry: 51, maths: 76 }
       ],
       isRollDuplicate: false,
+      filterBy: false,
     };
 
     this.branches = ["Computer Science", "Civil", "Mechanical", "Information Technology"]
@@ -46,9 +47,7 @@ export default class Studentdata extends Component {
 
   filterStd = (e) => {
     let branch = e.target.getAttribute('data-branch');
-    this.setState({
-      students: this.state.students.filter(obj => obj.branch === branch),
-    })
+    this.setState({ filterBy: branch })
   }
 
   render() {
@@ -99,7 +98,7 @@ export default class Studentdata extends Component {
               </div>
 
               <div className="col-xl-9 mt-2 text-center">
-                <b className="btn btn-primary">
+                <b onClick={()=>this.setState({filterBy: false})} className="btn btn-primary">
                   Total Student: {this.state.students.length}
                 </b>
                 &nbsp;
@@ -131,7 +130,9 @@ export default class Studentdata extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.students.map((elem, i) => {
+              {this.state.students.filter((ob) => {
+                return (this.state.filterBy !== false) ? ob.branch === this.state.filterBy : true;
+              }).map((elem, i) => {
                 return (
                   <tr>
                     <td>{i + 1}</td>
