@@ -1,4 +1,5 @@
 import { Component } from "react";
+import sort from './sort_icon.png'
 
 export default class Studentdata extends Component {
   constructor() {
@@ -98,11 +99,11 @@ export default class Studentdata extends Component {
               </div>
 
               <div className="col-xl-9 mt-2 text-center">
-                <b onClick={()=>this.setState({filterBy: false})} className="btn btn-primary">
+                <b onClick={() => this.setState({ filterBy: false })} className="btn btn-primary">
                   Total Student: {this.state.students.length}
                 </b>
                 &nbsp;
-                {this.branches.map(br => <b onClick={this.filterStd} data-branch={br} className='btn btn-primary m-1'> {br} {this.state.students.filter(ob => ob.branch === br).length}</b>)}
+                {this.branches.map(br => <b onClick={this.filterStd} data-branch={br} className='btn btn-info m-1'> {br} {this.state.students.filter(ob => ob.branch === br).length}</b>)}
               </div>
             </div>
           </form>
@@ -119,13 +120,13 @@ export default class Studentdata extends Component {
               <tr>
                 <th>S.no</th>
                 <th>Roll no</th>
-                <th>Name</th>
+                <th>Name </th>
                 <th>Branch</th>
-                <th>Physics</th>
+                <th>Physics </th>
                 <th>Chemistry</th>
                 <th>Maths</th>
-                <th>Total Marks</th>
-                <th>Percentage</th>
+                <th>Total Marks </th>
+                <th>Percentage </th>
                 <th>Action</th>
               </tr>
             </thead>
