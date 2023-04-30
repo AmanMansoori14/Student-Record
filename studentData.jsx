@@ -1,5 +1,4 @@
 import { Component } from "react";
-import sort from './sort_icon.png'
 
 export default class Studentdata extends Component {
   constructor() {
@@ -132,7 +131,7 @@ export default class Studentdata extends Component {
             </thead>
             <tbody>
               {this.state.students.filter((ob) => {
-                return (this.state.filterBy !== false) ? ob.branch === this.state.filterBy : true;
+                return (this.state.filterBy === false) ? true : ob.branch === this.state.filterBy;
               }).map((elem, i) => {
                 return (
                   <tr>
