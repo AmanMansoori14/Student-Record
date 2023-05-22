@@ -60,17 +60,17 @@ export default class Studentdata extends Component {
               <div className="col-xl-4 mt-2">
                 <input
                   type="number"
-                  onFocus={() => this.setState({ isRollDuplicate: false })}
-                  onBlur={this.checkRoll}
+                  onInput={this.checkRoll}
                   className="form-control"
                   ref={(ob) => (this.rollBox = ob)}
                   placeholder="Roll no"
+                  min={1000}
                   max={9999}
                   required
                 />
               </div>
               <div className="col-xl-4 mt-2">
-                <input type="text" className="form-control" onKeyDown={this.check} ref={(ob) => (this.nameBox = ob)} placeholder="Name" required />
+                <input type="text" className="form-control" ref={(ob) => (this.nameBox = ob)} placeholder="Name" required />
               </div>
               <div className="col-xl-4 mt-2">
                 <select className="form-control" ref={(ob) => (this.branchList = ob)} required>
