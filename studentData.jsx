@@ -10,7 +10,7 @@ export default class Studentdata extends Component {
         { roll: 1123, name: "Lokesh", branch: "Mechanical", physics: 55, chemistry: 51, maths: 76 }
       ],
       isRollDuplicate: false,
-      filterBy: false,
+      filterBy: undefined,
     };
 
     this.branches = ["Computer Science", "Civil", "Mechanical", "Information Technology"]
@@ -70,7 +70,7 @@ export default class Studentdata extends Component {
                 />
               </div>
               <div className="col-xl-4 mt-2">
-                <input type="text" className="form-control" onKeyDown={this.check} ref={(ob) => (this.nameBox = ob)} placeholder="Name" required />
+                <input type="text" className="form-control" ref={(ob) => (this.nameBox = ob)} placeholder="Name" required />
               </div>
               <div className="col-xl-4 mt-2">
                 <select className="form-control" ref={(ob) => (this.branchList = ob)} required>
@@ -98,11 +98,13 @@ export default class Studentdata extends Component {
               </div>
 
               <div className="col-xl-9 mt-2 text-center">
-                <b onClick={() => this.setState({ filterBy: false })} className="btn btn-primary">
+                <b onClick={() => this.setState({ filterBy: undefined })} className="btn btn-primary">
                   Total Student: {this.state.students.length}
                 </b>
                 &nbsp;
-                {this.branches.map(br => <b onClick={this.filterStd} data-branch={br} className='btn btn-info m-1'> {br} {this.state.students.filter(ob => ob.branch === br).length}</b>)}
+                {this.branches.map(
+                  br => <b onClick={this.filterStd} data-branch={br} className='btn btn-info m-1'> {br} {this.state.students.reduce((a, i) => (i.branch === br) ? a + 1 : a, 0)}</b>
+                )}
               </div>
             </div>
           </form>
@@ -131,7 +133,7 @@ export default class Studentdata extends Component {
             </thead>
             <tbody>
               {this.state.students.filter((ob) => {
-                return (this.state.filterBy === false) ? true : ob.branch === this.state.filterBy;
+                return (this.state.filterBy === undefined) ? true : ob.branch === this.state.filterBy;
               }).map((elem, i) => {
                 return (
                   <tr>
@@ -143,7 +145,7 @@ export default class Studentdata extends Component {
                     <td>{elem.chemistry}</td>
                     <td>{elem.maths}</td>
                     <td>{elem.physics + elem.chemistry + elem.maths}</td>
-                    <td>{((elem.physics + elem.chemistry + elem.maths) / 3).toFixed(2)}</td>
+                    <td>{((elem.physics + elem.chemistry + elem.maths) / 3).toFixed(2)}%</td>
                     <td>
                       <button onClick={this.deleteStd} data-roll={elem.roll} className='btn btn-danger'>Delete</button>
                     </td>
